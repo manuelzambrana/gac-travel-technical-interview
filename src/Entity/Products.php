@@ -45,6 +45,11 @@ class Products
     private $stock_historic;
 
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
 
     public function getId(): ?int
     {
