@@ -20,8 +20,6 @@ class RegisterController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            $user->setActive(true);
-            $user->setRoles(['ROLE_ADMIN']);
             $user->setPassword($passwordHasher->hashPassword($user,$form['password']->getData()));
             $em->persist($user);
             $em->flush();

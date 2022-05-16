@@ -51,6 +51,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $stock_historic;
 
+    public function __construct()
+    {
+        $this->active = true;
+        $this->roles = ['ROLE_ADMIN'];
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
