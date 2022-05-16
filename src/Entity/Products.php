@@ -75,6 +75,22 @@ class Products
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+
     public function getStock(): ?int
     {
         return $this->stock;

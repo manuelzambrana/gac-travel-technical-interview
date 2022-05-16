@@ -6,9 +6,19 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ */
+
+/**
+ * @ORM\Entity
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="Este usuario ya esta siendo utilizado"
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
