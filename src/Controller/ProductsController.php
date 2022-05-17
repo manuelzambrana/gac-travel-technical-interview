@@ -38,4 +38,34 @@ class ProductsController extends AbstractController
             'posts' => $posts
         ]);
     }
+
+
+    #[Route('/product/edit/{id}', name: 'product-edit')]
+    public function edit(Request $request, $id): Response
+    {
+        $product = $this->getDoctrine()->getRepository(Products::class)->find($id);
+        $form = $this->createForm(ProductsType::class, $product);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            $em->flush();
+            return $this->redirectToRoute('products');
+        }
+        return $this->render('products/update.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/product/delete/{id}', name: 'product-delete')]
+    public function delete($id): Response
+    {
+        $product = $this->getDoctrine()->getRepository(Products::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+
+        return $this->redirectToRoute('products');
+
+    }
 }

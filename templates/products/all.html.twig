@@ -91,8 +91,11 @@
                                             <a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Histórico" href="#">
                                                 <i class="las la-history"></i>
                                             </a>
-                                            <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="#">
+                                            <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" href="{{ path('product-edit', {'id': products.id }) }}">
                                                 <i class="ri-pencil-line"></i>
+                                            </a>
+                                            <a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar" href="{{ path('product-delete', {'id': products.id }) }}">
+                                                <i class="ri-delete-bin-2-fill"></i>
                                             </a>
                                         </td>
 
