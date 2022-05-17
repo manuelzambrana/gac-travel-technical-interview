@@ -20,7 +20,7 @@ class Categories
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $name;
+    private $nameCategory;
 
     /**
      * @ORM\Column(type="datetime")
@@ -44,14 +44,14 @@ class Categories
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameCategory(): ?string
     {
-        return $this->name;
+        return $this->nameCategory;
     }
 
-    public function setName(string $name): self
+    public function setNameCategory(string $nameCategory): self
     {
-        $this->name = $name;
+        $this->nameCategory = $nameCategory;
 
         return $this;
     }

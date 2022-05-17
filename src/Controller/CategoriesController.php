@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoriesController extends AbstractController
 {
-    #[Route('/categories/create', name: 'categories')]
+    #[Route('/categories/create', name: 'categories-create')]
     public function index(Request $request): Response
     {
         $category = new Categories();
@@ -21,7 +21,7 @@ class CategoriesController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('categories');
         }
         return $this->render('categories/index.html.twig', [
             'form' => $form->createView(),

@@ -13,8 +13,8 @@ class CategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add("Agregar", SubmitType::class)
+            ->add('nameCategory')
+
 
         ;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,5 +33,15 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route('/user', name: 'user')]
+    public function getAll(): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->findAll();
+        return $this->render('security/all.html.twig', [
+            'users' => $users
+        ]);
     }
 }

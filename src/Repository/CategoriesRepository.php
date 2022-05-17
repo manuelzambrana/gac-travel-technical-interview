@@ -20,7 +20,7 @@ class CategoriesRepository extends ServiceEntityRepository
     }
 
     public function AllCategories(){
-        return $this->getEntityManager()->createQuery('SELECT categories.id, categories.name 
+        return $this->getEntityManager()->createQuery('SELECT categories.id, categories.nameCategory
         FROM App:Categories categories')->getResult();
     }
 

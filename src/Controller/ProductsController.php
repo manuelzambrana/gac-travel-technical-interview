@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductsController extends AbstractController
 {
-    #[Route('/products', name: 'products')]
+    #[Route('/products/create', name: 'products-create')]
     public function index(Request $request): Response
     {
         $product = new Products();
@@ -25,6 +25,17 @@ class ProductsController extends AbstractController
         }
         return $this->render('products/index.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+
+    #[Route('/products', name: 'products')]
+    public function getAll(): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository(Products::class)->AllProducts();
+        return $this->render('products/all.html.twig', [
+            'posts' => $posts
         ]);
     }
 }

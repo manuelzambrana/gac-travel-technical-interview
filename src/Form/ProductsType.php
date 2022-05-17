@@ -19,7 +19,7 @@ class ProductsType extends AbstractType
             ->add('stock')
             ->add('category', EntityType::class, [
                 'class' => Categories::class,
-                'choice_label' => 'name',
+                'choice_label' => 'nameCategory',
                 'placeholder' => 'Seleccione una categoria...'
             ])
             ->add('Agregar', SubmitType::class)

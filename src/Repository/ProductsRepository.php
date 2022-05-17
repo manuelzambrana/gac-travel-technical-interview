@@ -19,6 +19,12 @@ class ProductsRepository extends ServiceEntityRepository
         parent::__construct($registry, Products::class);
     }
 
+    public function AllProducts(){
+        return $this->getEntityManager()->createQuery('SELECT products.id, products.name, products.stock, category.nameCategory
+        FROM App:Products products
+        JOIN products.category category')->getResult();
+    }
+
     // /**
     //  * @return Products[] Returns an array of Products objects
     //  */
