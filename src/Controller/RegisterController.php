@@ -23,11 +23,16 @@ class RegisterController extends AbstractController
             $user->setPassword($passwordHasher->hashPassword($user,$form['password']->getData()));
             $em->persist($user);
             $em->flush();
+
             return $this->redirectToRoute('register');
         }
         return $this->render('register/index.html.twig', [
             'controller_name' => 'RegisterController',
             'formulario' => $form->createView()
         ]);
+
+
+
+
     }
 }

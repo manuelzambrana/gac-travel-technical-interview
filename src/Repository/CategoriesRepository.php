@@ -19,6 +19,11 @@ class CategoriesRepository extends ServiceEntityRepository
         parent::__construct($registry, Categories::class);
     }
 
+    public function AllCategories(){
+        return $this->getEntityManager()->createQuery('SELECT categories.id, categories.name 
+        FROM App:Categories categories')->getResult();
+    }
+
     // /**
     //  * @return Categories[] Returns an array of Categories objects
     //  */

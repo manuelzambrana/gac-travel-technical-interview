@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoriesController extends AbstractController
 {
-    #[Route('/categories', name: 'categories')]
+    #[Route('/categories/create', name: 'categories')]
     public function index(Request $request): Response
     {
         $category = new Categories();
@@ -25,6 +25,18 @@ class CategoriesController extends AbstractController
         }
         return $this->render('categories/index.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+
+
+    #[Route('/categories', name: 'categories')]
+    public function getAll(): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository(Categories::class)->AllCategories();
+        return $this->render('categories/all.html.twig', [
+            'posts' => $posts
         ]);
     }
 }

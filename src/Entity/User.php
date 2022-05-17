@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -17,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @UniqueEntity(
  *     fields={"username"},
- *     message="Este usuario ya esta siendo utilizado"
+ *     message="hello"
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
