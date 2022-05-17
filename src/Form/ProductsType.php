@@ -22,7 +22,7 @@ class ProductsType extends AbstractType
                 'choice_label' => 'nameCategory',
                 'placeholder' => 'Seleccione una categoria...'
             ])
-            ->add('Agregar', SubmitType::class)
+
         ;
     }
 

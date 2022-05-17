@@ -34,7 +34,10 @@ class Products
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="products", cascade={"remove"})
+     *  @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
+     * })
      */
     private $category;
 

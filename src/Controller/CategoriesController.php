@@ -39,4 +39,36 @@ class CategoriesController extends AbstractController
             'posts' => $posts
         ]);
     }
+
+    #[Route('/categories/edit/{id}', name: 'categories-edit')]
+    public function edit(Request $request, $id): Response
+    {
+        $category = $this->getDoctrine()->getRepository(Categories::class)->find($id);
+        $form = $this->createForm(CategoriesType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+            return $this->redirectToRoute('categories');
+        }
+        return $this->render('categories/update.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/categories/delete/{id}', name: 'categories-delete')]
+    public function delete($id): Response
+    {
+        $category = $this->getDoctrine()->getRepository(Categories::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirectToRoute('categories');
+
+    }
+
+
+
 }

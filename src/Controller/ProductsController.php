@@ -21,7 +21,7 @@ class ProductsController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('products');
         }
         return $this->render('products/index.html.twig', [
             'form' => $form->createView(),
