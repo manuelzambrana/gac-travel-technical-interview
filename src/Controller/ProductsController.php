@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Products;
 use App\Form\ProductsType;
+use App\Form\StockType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,6 +68,32 @@ class ProductsController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('products');
+
+    }
+
+    #[Route('/product/addStock/{id}', name: 'product-add-stock')]
+    public function addStock(Request $request, $id, Products $product, EntityManagerInterface $entityManager)
+    {
+
+        $products = $this->getDoctrine()->getRepository(Products::class)->find($id);
+        $form = $this->createForm(StockType::class, $products);
+
+
+        $id = $form['stock']->getData();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $suma = $id +$form['stock']->getData();
+            $product->addStock($suma);
+            $entityManager->persist($product);
+            $entityManager->flush();
+            return $this->redirectToRoute('products');
+        }
+        return $this->render('products/addStock.html.twig', [
+            'form' => $form->createView(),
+            'id' => $id
+        ]);
+
+
 
     }
 }

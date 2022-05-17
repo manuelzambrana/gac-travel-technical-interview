@@ -110,4 +110,9 @@ class Products
 
         return $this;
     }
+
+    public function addStock($value){
+        $this->setStock( $value );
+        return  $this;
+    }
 }

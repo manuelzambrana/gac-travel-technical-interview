@@ -25,6 +25,10 @@ class ProductsRepository extends ServiceEntityRepository
         JOIN products.category category')->getResult();
     }
 
+
+
+
+
     // /**
     //  * @return Products[] Returns an array of Products objects
     //  */
