@@ -40,8 +40,15 @@
                                 <span class="ml-4">Usuarios</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ path('app_logout') }}" class="btn btn-primary add-list">
+                                <i class="las la-user mr-3"></i>Cerrar Sesion
+                            </a>
+                        </li>
                     </ul>
+
                 </nav>
+
             </div>
         </div>
 
@@ -82,7 +89,7 @@
                                         <td class="text-center">{{ products.nameCategory}}</td>
                                         <td class="text-center">{{ products.stock}}</td>
                                         <td class="text-right">
-                                            <a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar stock" href="#">
+                                            <a class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Eliminar stock" href="{{ path('product-remove-stock', {'id': products.id }) }}">
                                                 <i class="las la-minus"></i>
                                             </a>
                                             <a class="badge bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Añadir stock" href="{{ path('product-add-stock', {'id': products.id }) }}">

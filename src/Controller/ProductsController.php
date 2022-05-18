@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Entity\StockHistoric;
 use App\Form\ProductsType;
 use App\Form\StockType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -78,7 +79,7 @@ class ProductsController extends AbstractController
         $products = $this->getDoctrine()->getRepository(Products::class)->find($id);
         $form = $this->createForm(StockType::class, $products);
 
-
+        $user = $this->getUser();
         $id = $form['stock']->getData();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
@@ -86,11 +87,54 @@ class ProductsController extends AbstractController
             $product->addStock($suma);
             $entityManager->persist($product);
             $entityManager->flush();
+            $historic =  new StockHistoric("+".$suma,$products,$user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($historic);
+            $em->flush();
             return $this->redirectToRoute('products');
         }
         return $this->render('products/addStock.html.twig', [
             'form' => $form->createView(),
-            'id' => $id
+            'id' => $id,
+            'message' => 'Añadir Stock'
+        ]);
+
+
+
+    }
+
+
+    #[Route('/product/removeStock/{id}', name: 'product-remove-stock')]
+    public function removeStock(Request $request, $id, Products $product, EntityManagerInterface $entityManager)
+    {
+
+        $products = $this->getDoctrine()->getRepository(Products::class)->find($id);
+        $form = $this->createForm(StockType::class, $products);
+        $user = $this->getUser();
+
+        $id = $form['stock']->getData();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            if( $form['stock']->getData() <= $id) {
+
+                $suma = $id - $form['stock']->getData();
+                $product->removeStock($suma);
+                $entityManager->persist($product);
+                $entityManager->flush();
+                $historic =  new StockHistoric("-".$suma,$products,$user);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($historic);
+                $em->flush();
+                return $this->redirectToRoute('products');
+            }else{
+                $this->addFlash('error','No puedes quitar mas stock del que hay');
+            }
+        }
+        return $this->render('products/addStock.html.twig', [
+            'form' => $form->createView(),
+            'id' => $id,
+            'message' => 'Eliminar Stock',
+            'user' => $products
         ]);
 
 

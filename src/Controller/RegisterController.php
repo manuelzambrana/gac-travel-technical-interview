@@ -24,11 +24,27 @@ class RegisterController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('register');
+            return $this->redirectToRoute('success');
         }
         return $this->render('register/index.html.twig', [
             'controller_name' => 'RegisterController',
             'formulario' => $form->createView()
+        ]);
+
+
+
+
+    }
+
+
+
+    #[Route('/success', name: 'success')]
+    public function success()
+    {
+
+        return $this->render('register/success.html.twig', [
+            'controller_name' => 'RegisterController',
+
         ]);
 
 

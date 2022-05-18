@@ -38,6 +38,17 @@ class StockHistoric
      */
     private $user;
 
+
+    public function __construct($stock, $products, $user)
+    {
+        $this->created_at = new \DateTime();
+        $this->stock = $stock;
+        $this->products = $products;
+        $this->user = $user;
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;

@@ -15,7 +15,7 @@ class Products
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -112,6 +112,11 @@ class Products
     }
 
     public function addStock($value){
+        $this->setStock( $value );
+        return  $this;
+    }
+
+    public function removeStock($value){
         $this->setStock( $value );
         return  $this;
     }
